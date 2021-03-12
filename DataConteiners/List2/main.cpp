@@ -5,16 +5,17 @@ using std::cout;
 using std::endl;
 
 #define tab "\t"
+template <typename T>
 
 class List
 {
 	class Element
 	{
-		int Data;
+		T Data;
 		Element* pNext;
 		Element* pPrev;
 	public:
-		Element(int Data, Element* pNext = nullptr, Element* pPrev = nullptr) :Data(Data), pNext(pNext), pPrev(pPrev)
+		Element(T Data, Element* pNext = nullptr, Element* pPrev = nullptr) :Data(Data), pNext(pNext), pPrev(pPrev)
 		{
 #ifdef DEBUG
 			cout << "EConstructor:\t" << this << endl;
@@ -58,7 +59,7 @@ public:
 
 		}
 		//				Operators:
-		int& operator*()
+		T& operator*()
 		{
 			return Temp->Data;
 		}
@@ -163,8 +164,9 @@ public:
 		return Temp->Data;
 	}
 	
+	
 	//				Adding elements:
-	void push_front(int Data)
+	void push_front(T Data)
 	{
 		//Element* New = new Element(Data);
 		if (Head == nullptr && Tail == nullptr)
@@ -179,7 +181,7 @@ public:
 		}
 		size++;
 	}
-	void push_back(int Data)
+	void push_back(T Data)
 	{
 		if (empty())
 			Head = Tail = new Element(Data);
@@ -187,7 +189,7 @@ public:
 			Tail = Tail->pNext = new Element(Data, nullptr, Tail);
 		size++;
 	}
-	void insert(int Index, int Data)
+	void insert(int Index, T Data)
 	{
 		if (empty() || Index == 0)
 		{
@@ -326,7 +328,7 @@ public:
 	}
 };
 
-//#define BASE_CHECK
+#define BASE_CHECK
 //#define ITERATORS_CHECK
 //#define INDEX_VS_ITERATOR
 
@@ -334,9 +336,9 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-//	cout << "Введите размер списка: "; cin >> n;
+	cout << "Введите размер списка: "; cin >> n;
 #ifdef BASE_CHECK
-	List list;
+	List <int> list;
 	for (int i = 0; i < n; i++)
 	{
 		//list.push_front(rand() % 100);
@@ -400,11 +402,10 @@ void main()
 	//for (List::Iterator it = list.begin(); it != list.end(); it++)
 	//	*it = rand();
 	//cout << "Данные загружены." << endl;
-
-	List list_2 = { 5, 8, 9, 10, 50 };
-	int summ = 0;
-	summ = list_2[1] + list_2[3];
+	cout << "________________________________________________" << endl;
+	List<char> list_2 = { 'H','E','L','L','O',' ','W','O','R','L','D'};
+	
 	list_2.print();
-	cout << summ;
+
 
 }
